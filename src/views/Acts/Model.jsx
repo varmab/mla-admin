@@ -13,7 +13,7 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import modalStyle from "assets/jss/material-dashboard-pro-react/modalStyle.jsx";
 
-import AddRow from "./AddRow"
+import AddAct from "./AddAct"
 
 
 function Transition(props) {
@@ -80,7 +80,7 @@ class Modal extends React.Component {
                         id="modal-slide-description"
                         className={classes.modalBody}>
                        
-                        <AddRow />
+                        <AddAct/>
                     </DialogContent>
                     <DialogActions
                         className={classes.modalFooter + " " + classes.modalFooterCenter}>
