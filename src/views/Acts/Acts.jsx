@@ -38,7 +38,8 @@ class Acts extends React.Component {
       title:'',
       act:'',
       year:'',
-      url:'',   
+      url:'', 
+
       actions: (
         // we've added some custom button actions
         <div className="actions-right">
@@ -53,15 +54,8 @@ class Acts extends React.Component {
             <Dvr />
           </Button>{" "}
           {/* use this button to remove the data row */}
-          <Button
-            justIcon
-            round
-            simple
-            color="danger"
-            className="remove"
-          >
-            <Close />
-          </Button>{" "}
+
+          
         </div>
       )
     }     
@@ -111,13 +105,28 @@ class Acts extends React.Component {
                     sortable: false,
                     filterable: false
                   }
+
                 ]}
                 defaultPageSize={10}
                 showPaginationTop
                 showPaginationBottom={false}
                 className="-striped -highlight"
+
               />
+              
             </CardBody>
+            <Button
+            justIcon
+            round
+            simple
+            color="danger"
+            className="remove"
+          >
+            <Close />
+          </Button>{" "}
+
+
+
           </Card>
         </GridItem>
       </GridContainer>
@@ -133,6 +142,7 @@ const ACTS_QUERY = gql`
       actNumber
       actYear
       actUrl
+
 
     }
   }

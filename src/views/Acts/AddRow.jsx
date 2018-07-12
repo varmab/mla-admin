@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { compose } from 'react-apollo';
+import TextField from '@material-ui/core/TextField'
 
 
 class AddRow extends React.Component {
@@ -34,7 +35,12 @@ class AddRow extends React.Component {
       userSubmited: false
     }
 
-    this.onUpdate = this.onUpdate.bind(this);
+    this.onUpdateAct = this.onUpdateAct.bind(this);
+    this.onUpdateTitle = this.onUpdateTitle.bind(this);
+    this.onUpdateYear = this.onUpdateYear.bind(this);
+    this.onUpdateUrl = this.onUpdateUrl.bind(this);
+
+
   };
 
   componentWillReceiveProps(newProps) {
@@ -45,22 +51,27 @@ class AddRow extends React.Component {
     })
   };
 
-  onUpdate(e) {
+  onUpdateAct(e) {
     this.setState({ act: e.target.value })
-    this.setState({ title: this.title.value })
-    this.setState({ year: this.year.value })
-    this.setState({ url: this.url.value })
+  };
+  onUpdateTitle(e){
+      this.setState({ title: e.target.value })
+  };
+  onUpdateYear(e){
+      this.setState({ year:  e.target.value  })
+  };
+  onUpdateUrl(e){
+      this.setState({ url:  e.target.value  })
   };
 
   createAct() {
-    console.log(JSON.stringify(this.refs.act.value))
     this.props.createAct({
       variables:
         {
-          actNumber: this.refs.act.value,
+          actNumber: this.state.act,
           title: this.state.title,
-          year: this.state.year,
-          url: this.state.url,
+          actYear: this.state.year,
+          actUrl: this.state.url,
 
         }
     })
@@ -76,59 +87,60 @@ class AddRow extends React.Component {
     return (
       <form>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              ref="act"
-              placeholder="Act"
-              labelText="Act"
-              formControlProps={{
-                fullWidth: true
-              }}
-            />
+          <GridItem xs={12} sm={12} md={6}>
+            <TextField
+                name="act"
+                 hintText="Act"
+                 placeholder="ActNumber"
+                 value={this.state.act}
+                 onChange={this.onUpdateAct.bind(this)}
+                 floatingLabelFixed
+               />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              id="title"
-              value={this.state.title}
-              placeholder="Title"
-              onChange={this.onUpdate.bind(this)}
-              labelText="Title"
-              formControlProps={{
-                fullWidth: true
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              id="year"
-              value={this.state.year}
-              placeholder="Year"
-              onChange={this.onUpdate.bind(this)}
-              labelText="Year"
-              formControlProps={{
-                fullWidth: true
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              id="url"
-              value={this.state.url}
-              placeholder="Url"
-              onChange={this.onUpdate.bind(this)}
-              labelText="Url"
-              formControlProps={{
-                fullWidth: true
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-        <Button
+       <br />
+         <GridItem xs={12} sm={12} md={6}>
+               <TextField
+                 name="title"
+                 hintText="title"
+                 placeholder="Title"
+                 value={this.state.title}
+                 onChange={this.onUpdateTitle.bind(this)}
+                 floatingLabelFixed
+               />
+         </GridItem>
+       <br />
+         <GridItem xs={12} sm={12} md={6}>
+               <TextField
+                 name="year"
+                 hintText="Year"
+                 placeholder="Year"
+                 value={this.state.year}
+                 onChange={this.onUpdateYear.bind(this)}
+                  floatingLabelFixed
+               />
+         </GridItem>
+       <br />
+         <GridItem xs={12} sm={12} md={6}>
+               <TextField
+                 name="url"
+                 hintText="url"
+                 placeholder="Url"
+                 value={this.state.url}
+                 onChange={this.onUpdateUrl.bind(this)}
+                 floatingLabelFixed
+               />
+         </GridItem>
+       <br />
+    </GridContainer>
+       <center style={{paddingTop:"30px"}}>
+       <Button
           onClick={this.createAct.bind(this)}
           color="primary">
           Submit
             </Button>
-      </form>
+            </center>
+
+  </form>
     );
   }
 }
@@ -145,7 +157,7 @@ const ACTS_QUERY = gql`
   }
 `;
 const ADD_ACTS = gql`
-    mutation createAct( $actNumber: Int,$title:String,$actYear:Int,$actUrl: String, ){
+    mutation createAct( $actNumber: String,$title:String,$actYear:String,$actUrl: String, ){
          createAct(actNumber:$actNumber,title:$title,actYear:$actYear,actUrl:$actUrl){
                                             actUrl
                                             title     
