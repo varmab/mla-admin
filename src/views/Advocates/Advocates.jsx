@@ -35,30 +35,8 @@ class ReactTables extends React.Component {
           actions: (
             // we've added some custom button actions
             <div className="actions-right">
-              {/* use this button to add a like kind of action */}
-              <Button
-                justIcon
-                round
-                simple
-                onClick={() => {
-                  let obj = this.state.data.find(o => o.id === key);
-                  alert(
-                    "You've clicked LIKE button on \n{ \nName: " +
-                      obj.name +
-                      ", \nposition: " +
-                      obj.position +
-                      ", \noffice: " +
-                      obj.office +
-                      ", \nage: " +
-                      obj.age +
-                      "\n}."
-                  );
-                }}
-                color="info"
-                className="like"
-              >
-                <Favorite />
-              </Button>{" "}
+              
+              
               {/* use this button to add a edit kind of action */}
               <Button
                 justIcon

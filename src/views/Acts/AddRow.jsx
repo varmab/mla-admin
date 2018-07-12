@@ -10,6 +10,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { compose } from 'react-apollo';
 import TextField from '@material-ui/core/TextField'
+import Close from '@material-ui/icons/Close'
 
 
 class AddRow extends React.Component {
@@ -130,7 +131,8 @@ class AddRow extends React.Component {
                  floatingLabelFixed
                />
          </GridItem>
-       <br />
+         <br />
+         
     </GridContainer>
        <center style={{paddingTop:"30px"}}>
        <Button
@@ -141,6 +143,7 @@ class AddRow extends React.Component {
             </center>
 
   </form>
+  
     );
   }
 }

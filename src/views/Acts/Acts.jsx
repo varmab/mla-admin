@@ -54,7 +54,15 @@ class Acts extends React.Component {
             <Dvr />
           </Button>{" "}
           {/* use this button to remove the data row */}
-
+          <Button
+            justIcon
+            round
+            simple
+            color="danger"
+            className="remove"
+          >
+            <Close />
+          </Button>{" "}
           
         </div>
       )
@@ -112,20 +120,10 @@ class Acts extends React.Component {
                 showPaginationBottom={false}
                 className="-striped -highlight"
 
+
               />
               
             </CardBody>
-            <Button
-            justIcon
-            round
-            simple
-            color="danger"
-            className="remove"
-          >
-            <Close />
-          </Button>{" "}
-
-
 
           </Card>
         </GridItem>
