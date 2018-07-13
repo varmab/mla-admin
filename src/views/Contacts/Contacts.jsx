@@ -29,15 +29,20 @@ class Contacts extends React.Component {
       loading: PropTypes.bool,
       error: PropTypes.object,
       allContacts: PropTypes.array,
+      allDistricts: PropTypes.array,
     }),
   }
   constructor(props) {
     super(props);
     this.state={
       contacts:[],
+      districts:[],
+      districtId:props.districtId,
+      districtName:'',
       id:"",
       address:'',
       phone:'',
+      district:'',
        
 
       actions: (
@@ -71,7 +76,7 @@ class Contacts extends React.Component {
   componentWillReceiveProps(newProps){
      console.log(JSON.stringify(newProps)+"Json Data")         
       this.setState({
-      contacts:newProps.contacts.allContacts
+      contacts:newProps.contacts.allContacts,
     })    
    }
  
@@ -101,6 +106,10 @@ class Contacts extends React.Component {
                   {
                     Header: "Phone",
                     accessor: "phone"
+                  },
+                  {
+                    Header: "District",
+                    accessor: "name"
                   },
                   
                   {
@@ -137,13 +146,26 @@ const CONTACTS_QUERY = gql`
       address 
       phone
       
-
-
-    }
-  }
+    },
+    allDistricts (filter:{id:$districtId}) {
+                                id
+                                name
+                              }
+                              },
+    
 `;
 
-export default compose(graphql(CONTACTS_QUERY,
-{name:"contacts"}))(Contacts);
+
+
+
+export default (compose(graphql(CONTACTS_QUERY,{
+name:"contacts",
+ options:(ownProps)=>({
+   variables: {
+  districtId:ownProps.districtId,
+    
+   }
+ })
+}))(Contacts));
 
 

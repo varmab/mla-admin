@@ -1,6 +1,7 @@
 import React from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import People from '@material-ui/icons/People';
+import Delete from '@material-ui/icons/Delete';
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
@@ -32,6 +33,7 @@ class AddRow extends React.Component {
       title: '',
       year: '',
       url: '',
+      
       loading: false,
       userSubmited: false
     }
@@ -40,7 +42,7 @@ class AddRow extends React.Component {
     this.onUpdateTitle = this.onUpdateTitle.bind(this);
     this.onUpdateYear = this.onUpdateYear.bind(this);
     this.onUpdateUrl = this.onUpdateUrl.bind(this);
-
+    
 
   };
 
@@ -64,6 +66,7 @@ class AddRow extends React.Component {
   onUpdateUrl(e){
       this.setState({ url:  e.target.value  })
   };
+  
 
   createAct() {
     this.props.createAct({
@@ -73,7 +76,7 @@ class AddRow extends React.Component {
           title: this.state.title,
           actYear: this.state.year,
           actUrl: this.state.url,
-
+          
         }
     })
       .then((user) => {
@@ -133,6 +136,7 @@ class AddRow extends React.Component {
          </GridItem>
          <br />
          
+         
     </GridContainer>
        <center style={{paddingTop:"30px"}}>
        <Button
@@ -155,6 +159,7 @@ const ACTS_QUERY = gql`
         title  
         actYear
         actUrl
+
        
     }
   }
