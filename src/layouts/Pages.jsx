@@ -10,9 +10,7 @@ import PagesHeader from "components/Header/PagesHeader.jsx";
 import Footer from "components/Footer/Footer.jsx";
 
 import pagesRoutes from "routes/pages.jsx";
-
 import pagesStyle from "assets/jss/material-dashboard-pro-react/layouts/pagesStyle.jsx";
-
 import bgImage from "assets/img/register.jpeg";
 
 // var ps;
@@ -22,7 +20,6 @@ class Pages extends React.Component {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <PagesHeader {...rest} />
         <div className={classes.wrapper} ref="wrapper">
           <div className={classes.fullPage}>
             <Switch>
@@ -44,7 +41,7 @@ class Pages extends React.Component {
                 );
               })}
             </Switch>
-            <Footer white />
+            
             <div
               className={classes.fullPageBackground}
               style={{ backgroundImage: "url(" + bgImage + ")" }}

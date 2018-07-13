@@ -3,8 +3,8 @@ import Pages from "layouts/Pages.jsx";
 
 
 var indexRoutes = [
-   { path: "/", name: "Home", component: Pages },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard }
+   { path: "/pages", name: "Home", component: Pages },
+  { path: "/", name: "Dashboard", component: Dashboard }
 ];
 
 export default indexRoutes;

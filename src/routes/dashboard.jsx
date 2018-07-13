@@ -32,7 +32,7 @@ var dashRoutes = [
       },
       {
         path: "/documentsAndDeeds",
-        name: "DocumentsAndDeeds",
+        name: "Documents And Deeds",
         icon: DashboardIcon,
         component: DocumentsAndDeeds
       },
