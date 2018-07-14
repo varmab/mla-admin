@@ -66,11 +66,33 @@ class Gallery extends React.Component {
       )
     }     
   }
-  componentWillReceiveProps(newProps){
-     console.log(JSON.stringify(newProps)+"Gallery Data")         
+  
+   componentWillReceiveProps(newProps){
+     console.log(JSON.stringify(newProps)+"Gallery Data")
+      var galleries=newProps.galleries.allGalleries.map((gallery) => {
+                                      return {
+                                        id: gallery.id,
+                                        title: gallery.title,
+                                        image: gallery.image,
+                                       
+                                        actions: (
+                                          <div >
+                                            
+                                            <Button
+                                              justIcon
+                                              round
+                                              simple
+                                              style={{color:"black"}}
+                                            >
+                                              Click 
+                                            </Button>
+                                          </div>
+                                        )
+                                      };
+                                    })       
       this.setState({
-      galleries:newProps.Gallery.allGalleries
-    })    
+        galleries
+      })    
    }
  
   render() {
@@ -141,5 +163,5 @@ const GALLERIES_QUERY = gql`
 `;
 
 export default compose(graphql(GALLERIES_QUERY,
-{name:"Gallery"}))(Gallery);
+{name:"galleries"}))(Gallery);
 
