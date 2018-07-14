@@ -69,10 +69,45 @@ class Acts extends React.Component {
     }     
   }
   componentWillReceiveProps(newProps){
-     console.log(JSON.stringify(newProps)+"Json Data")         
+     console.log(JSON.stringify(newProps)+"Json Data")
+      var acts=newProps.acts.allActs.map((act) => {
+                                      return {
+                                        id: act.id,
+                                        title: act.title,
+                                        actNumber: act.actNumber,
+                                        actYear: act.actYear,
+                                        actUrl: act.actUrl,
+                                        actions: (
+                                          <div>
+                                            <Button
+                                              justIcon
+                                              round
+                                              simple
+                                              onClick={() => {
+                                                
+                                              }}
+                                              color="warning"
+                                              className="edit"
+                                            >
+                                            <Dvr />
+                                            </Button>{" "}
+                                            <Button
+                                              justIcon
+                                              round
+                                              simple
+                                              onClick={() =>{}}
+                                              color="danger"
+                                              className="remove"
+                                            >
+                                              <Close />
+                                            </Button>
+                                          </div>
+                                        )
+                                      };
+                                    })       
       this.setState({
-      acts:newProps.acts.allActs
-    })    
+        acts
+      })    
    }
  
   render() {
@@ -119,20 +154,8 @@ class Acts extends React.Component {
                 showPaginationTop
                 showPaginationBottom={false}
                 className="-striped -highlight"
-
-
               />
-              <Button
-            justIcon
-            round
-            simple
-            color="danger"
-            className="remove"
-          >
-            <Close />
-          </Button>
             </CardBody>
-
           </Card>
         </GridItem>
       </GridContainer>
@@ -144,16 +167,14 @@ class Acts extends React.Component {
 const ACTS_QUERY = gql`
   query allActs {
     allActs {
+      id
       title 
       actNumber
       actYear
       actUrl
-
-
     }
   }
 `;
 
-export default compose(graphql(ACTS_QUERY,
-{name:"acts"}))(Acts);
+export default compose(graphql(ACTS_QUERY,{name:"acts"}))(Acts);
 

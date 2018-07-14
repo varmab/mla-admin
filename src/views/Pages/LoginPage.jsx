@@ -88,7 +88,7 @@ class LoginPage extends React.Component {
                     />
                   </CardBody>
                   <CardFooter className={classes.justifyContentCenter}>
-                    <Button color="rose" simple size="lg" block href="/advocates">
+                    <Button color="rose" simple size="lg" block onClick={this.login}>
                       Let's Go
                     </Button>
                   </CardFooter>
