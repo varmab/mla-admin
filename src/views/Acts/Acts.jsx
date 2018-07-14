@@ -122,7 +122,15 @@ class Acts extends React.Component {
 
 
               />
-              
+              <Button
+            justIcon
+            round
+            simple
+            color="danger"
+            className="remove"
+          >
+            <Close />
+          </Button>
             </CardBody>
 
           </Card>
