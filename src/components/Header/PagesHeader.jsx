@@ -95,14 +95,14 @@ class PagesHeader extends React.Component {
           <Hidden smDown implementation="css">
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                Material Dashboard Pro React
+                MLA
               </Button>
             </div>
           </Hidden>
           <Hidden mdUp>
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                MD Pro React
+                MLA
               </Button>
             </div>
           </Hidden>
