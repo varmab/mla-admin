@@ -79,6 +79,7 @@ class Acts extends React.Component {
                                         actUrl: act.actUrl,
                                         actions: (
                                           <div>
+                                           
                                             <Button
                                               justIcon
                                               round
@@ -91,17 +92,31 @@ class Acts extends React.Component {
                                             >
                                             <Dvr />
                                             </Button>{" "}
-                                            <Button
-                                              justIcon
-                                              round
-                                              simple
-                                              onClick={() =>{}}
-                                              color="danger"
-                                              className="remove"
-                                            >
-                                              <Close />
-                                            </Button>
-                                          </div>
+                            
+                                         <Button
+                                           justIcon
+                                           round
+                                           simple
+                                           onClick={() => {
+                                             var data = this.state.acts;
+                                             acts.find((o, i) => {
+                                               if (o.id === act.id) {
+                                                 // here you should add some custom code so you can delete the data
+                                                 // from this component and from your server as well
+                                                 data.splice(i, 1);
+                                                 return true;
+                                               }
+                                               return false;
+                                             });
+                                             this.setState({acts: acts });
+                                           }}
+                                           color="danger"
+                                           className="remove"
+                                         >
+                                           <Close />
+                                         </Button>{" "}
+                                         </div>
+                                          
                                         )
                                       };
                                     })       
