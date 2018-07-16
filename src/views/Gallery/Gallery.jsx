@@ -66,7 +66,7 @@ class Gallery extends React.Component {
       )
     }     
   }
-  
+ 
    componentWillReceiveProps(newProps){
      console.log(JSON.stringify(newProps)+"Gallery Data")
       var galleries=newProps.galleries.allGalleries.map((gallery) => {
@@ -76,17 +76,11 @@ class Gallery extends React.Component {
                                         image: gallery.image,
                                        
                                         actions: (
-                                          <div >
-                                            
-                                            <Button
-                                              justIcon
-                                              round
-                                              simple
-                                              style={{color:"black"}}
-                                            >
-                                              Click 
-                                            </Button>
-                                          </div>
+                                          
+
+                                          <div className="col mt-5" key={gallery.id}>
+                                <h6 className="title" style={{cursor:"pointer"}}onClick={this.gotoGalleries.bind(this,gallery.id)}>Click</h6>
+                            </div>
                                         )
                                       };
                                     })       
@@ -94,7 +88,10 @@ class Gallery extends React.Component {
         galleries
       })    
    }
- 
+    
+ gotoGalleries(id){
+        this.props.history.push('/GalleryDetails/' +id);
+      }
   render() {
     const { classes } = this.props;
     return (

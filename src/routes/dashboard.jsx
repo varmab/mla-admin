@@ -3,8 +3,10 @@ import Acts from "views/Acts/Acts.jsx";
 import Contacts from "views/Contacts/Contacts.jsx";
 import DocumentsAndDeeds from "views/DocumentsAndDeeds/DocumentsAndDeeds.jsx";
 import Gallery from "views/Gallery/Gallery.jsx";
+import GalleryDetails from "views/Gallery/GalleryDetails.jsx";
 import Journals from "views/Journals/Journals.jsx";
 import Judgments from "views/Judgments/Judgments.jsx";
+
 
 
 // @material-ui/icons
@@ -41,6 +43,12 @@ var dashRoutes = [
         name: "Gallery",
         icon: DashboardIcon,
         component: Gallery
+      },
+      {
+        path: "/GalleryDetails/:id",
+        name: "GalleryDetails",
+        icon: DashboardIcon,
+        component: GalleryDetails
       },
       {
         path: "/journals",
