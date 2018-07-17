@@ -23,12 +23,14 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { compose } from 'react-apollo';
 
+
 class Acts extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
       loading: PropTypes.bool,
       error: PropTypes.object,
       allActs: PropTypes.array,
+      deleteAct: PropTypes.func,
     }),
   }
   constructor(props) {
@@ -39,35 +41,28 @@ class Acts extends React.Component {
       act:'',
       year:'',
       url:'', 
-
-      actions: (
-        // we've added some custom button actions
-        <div className="actions-right">
-          {/* use this button to add a edit kind of action */}
-          <Button
-            justIcon
-            round
-            simple
-            color="warning"
-            className="edit"
-          >
-            <Dvr />
-          </Button>{" "}
-          {/* use this button to remove the data row */}
-          <Button
-            justIcon
-            round
-            simple
-            color="danger"
-            className="remove"
-          >
-            <Close />
-          </Button>{" "}
-          
-        </div>
-      )
+      actions: '',
+      currentId:'',
+      userSubmited: false
     }     
   }
+
+  deleteAct(id) {
+    this.props.deleteAct({
+      variables:
+        {
+          id
+          
+        }
+    })
+      .then((user) => {
+        alert(JSON.stringify(user) + "acts")
+        this.setState({
+          userSubmited: true,
+          
+        })
+      })
+  };
   componentWillReceiveProps(newProps){
      console.log(JSON.stringify(newProps)+"Json Data")
       var acts=newProps.acts.allActs.map((act) => {
@@ -85,10 +80,12 @@ class Acts extends React.Component {
                                               round
                                               simple
                                               onClick={() => {
-                                                
+
+
                                               }}
                                               color="warning"
                                               className="edit"
+                                              
                                             >
                                             <Dvr />
                                             </Button>{" "}
@@ -98,17 +95,8 @@ class Acts extends React.Component {
                                            round
                                            simple
                                            onClick={() => {
-                                             var data = this.state.acts;
-                                             acts.find((o, i) => {
-                                               if (o.id === act.id) {
-                                                 // here you should add some custom code so you can delete the data
-                                                 // from this component and from your server as well
-                                                 data.splice(i, 1);
-                                                 return true;
-                                               }
-                                               return false;
-                                             });
-                                             this.setState({acts: acts });
+                                             alert(act.id)
+                                             this.deleteAct(act.id)
                                            }}
                                            color="danger"
                                            className="remove"
@@ -191,5 +179,18 @@ const ACTS_QUERY = gql`
   }
 `;
 
-export default compose(graphql(ACTS_QUERY,{name:"acts"}))(Acts);
 
+const DELETE_ACTS = gql`
+    mutation deleteAct( $id:ID! ){
+         deleteAct(id:$id){
+                              id            
+                           }
+                        } `
+
+export default compose(
+  graphql(ACTS_QUERY,{
+name:"acts",
+ 
+}),
+  graphql(DELETE_ACTS,)
+)(Acts);
