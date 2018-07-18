@@ -16,6 +16,7 @@ import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import Model from "./Model";
+import ModelEdit from "./ModelEdit";
 import { dataTable } from "variables/general.jsx";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx";
 import PropTypes from 'prop-types'
@@ -73,37 +74,26 @@ class Acts extends React.Component {
                                         actYear: act.actYear,
                                         actUrl: act.actUrl,
                                         actions: (
-                                          <div>
-                                           
-                                            <Button
-                                              justIcon
-                                              round
-                                              simple
-                                              onClick={() => {
-
-
-                                              }}
-                                              color="warning"
-                                              className="edit"
-                                              
-                                            >
-                                            <Dvr />
-                                            </Button>{" "}
-                            
-                                         <Button
-                                           justIcon
-                                           round
-                                           simple
-                                           onClick={() => {
-                                             alert(act.id)
-                                             this.deleteAct(act.id)
-                                           }}
-                                           color="danger"
-                                           className="remove"
-                                         >
-                                           <Close />
-                                         </Button>{" "}
-                                         </div>
+                                          <div style={{display:"flex"}}>
+                                            <div >
+                                               <ModelEdit/>
+                                            </div>
+                                            <div >
+                                                <Button
+                                                 justIcon
+                                                 round
+                                                 simple
+                                                 onClick={() => {
+                                                   alert(act.id)
+                                                   this.deleteAct(act.id)
+                                                 }}
+                                                 color="danger"
+                                                 className="remove"
+                                                >
+                                                   <Close />
+                                                </Button>{" "}
+                                            </div>
+                                          </div>
                                           
                                         )
                                       };
