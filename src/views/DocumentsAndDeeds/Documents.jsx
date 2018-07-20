@@ -15,63 +15,47 @@ import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import Model from "./Model";
+
 import { dataTable } from "variables/general.jsx";
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx";
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { compose } from 'react-apollo';
-
-class DocumentsAndDeeds extends React.Component {
+import { withRouter } from 'react-router';
+class Documents extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
       loading: PropTypes.bool,
       error: PropTypes.object,
-      allDocumentCategories: PropTypes.array,
+      allDocuments: PropTypes.array,
+      allDocumentCategories:PropTypes.array
     }),
   }
   constructor(props) {
     super(props);
     this.state={
       documents:[],
-      categoryName:'',
-      id:'',
-      
-      
+      docName:'',
+      docNumber:'',
+      s3Url:'',
+      loading:false
     }     
   }
- 
-   componentWillReceiveProps(newProps){
-     console.log(JSON.stringify(newProps)+"DocumentCategory Data")
-      var documents=newProps.documents.allDocumentCategories.map((DocumentCategory) => {
-                                      return {
-                                        id: DocumentCategory.id,
-                                        categoryName: DocumentCategory.categoryName,
-                                        
-                                       
-                                        actions: (
-                                          
-
-                                          <div className="col mt-5" key={DocumentCategory.id}>
-                                <h6 className="title" style={{cursor:"pointer"}}onClick={this.gotoDocumentCategory.bind(this,DocumentCategory.id)}>Click</h6>
-                            </div>
-                                        )
-                                      };
-                                    })       
+  componentWillReceiveProps(newProps){
+  let documentCategoryId = this.props.match.params.id
+   console.log(JSON.stringify(newProps)+ "document")
       this.setState({
-        documents
-      })    
+      documents:newProps.allDocuments.allDocuments,
+      loading : true
+    })    
    }
-    
- gotoDocumentCategory(id){
-        this.props.history.push('/Documents/' +id);
-      }
+ 
   render() {
     const { classes } = this.props;
     return (
         <div>
-        <Model/>
+        
       <GridContainer>
         <GridItem xs={12}>
           <Card>
@@ -83,33 +67,27 @@ class DocumentsAndDeeds extends React.Component {
                 filterable               
                 columns={[
                   {
-                    Header: "ID",
-                    accessor: "id"
-                  },
-                  {
-                    Header: "CategoryName",
-                    accessor: "categoryName"
+                    Header: "Doc Name",
+                    accessor: "docName"
                   },
                   
                   {
-                    Header: "Actions",
-                    accessor: "actions",
-                    
-                    sortable: false,
-                    filterable: false
-                  }
-
+                    Header: "Doc Number",
+                    accessor: "docNumber"
+                  },
+                  {
+                    Header: "s3 Url",
+                    accessor: "s3Url"
+                  },
+                  
                 ]}
                 defaultPageSize={10}
                 showPaginationTop
                 showPaginationBottom={false}
                 className="-striped -highlight"
-
-
               />
               
             </CardBody>
-
           </Card>
         </GridItem>
       </GridContainer>
@@ -118,19 +96,24 @@ class DocumentsAndDeeds extends React.Component {
   }
 }
 
-const DOCUMENTCATEGORY_QUERY = gql`
-  query allDocumentCategories {
-    allDocumentCategories {
-       
+const DOCUMENTS_QUERY = gql`
+query allDocuments($id:ID){
+    allDocuments(filter:{documentCategory:{id:$id}}) {
+        docName
+        docNumber
+        s3Url
+    },
+    allDocumentCategories (filter:{id:$id}){
       id
-      categoryName
       
-
-
-    }
   }
+}
 `;
-
-export default compose(graphql(DOCUMENTCATEGORY_QUERY,
-{name:"documents"}))(DocumentsAndDeeds);
-
+export default  withRouter(compose(graphql(DOCUMENTS_QUERY ,{
+  name:'allDocuments',
+  options:(ownProps)=>({
+    variables: {
+      id:ownProps.match.params.id
+    }
+  }) 
+})) (Documents));

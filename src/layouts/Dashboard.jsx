@@ -30,6 +30,7 @@ const switchRoutes = (
         return prop.views.map((prop, key) => {
           return (
             <Route path={prop.path} component={prop.component} key={key} />
+
           );
         });
       return <Route path={prop.path} component={prop.component} key={key} />;
@@ -87,6 +88,7 @@ class Dashboard extends React.Component {
       });
     return (
       <div className={classes.wrapper}>
+
         <Sidebar
           routes={dashboardRoutes}
           logoText={"MLA ADMIN"}
@@ -100,7 +102,7 @@ class Dashboard extends React.Component {
           {...rest}
         />
         <div className={mainPanel} ref="mainPanel">
-          <Header
+          <Header  
             sidebarMinimize={this.sidebarMinimize.bind(this)}
             miniActive={this.state.miniActive}
             routes={dashboardRoutes}
@@ -109,8 +111,10 @@ class Dashboard extends React.Component {
           {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
+            
               <div className={classes.container}>{switchRoutes}</div>
-            </div>
+             </div> 
+            
           ) : (
             <div className={classes.map}>{switchRoutes}</div>
           )}

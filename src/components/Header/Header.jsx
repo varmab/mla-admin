@@ -49,8 +49,9 @@ function Header({ ...props }) {
       [classes.sidebarMinimizeRTL]: rtlActive
     });
   return (
-    <AppBar className={classes.appBar + appBarClasses}>
-      <Toolbar className={classes.container}>
+    <AppBar position="static">
+      
+      <Toolbar className={classes.appBar + appBarClasses+classes.container}>
         <Hidden smDown>
           <div className={sidebarMinimize}>
             {props.miniActive ? (
@@ -95,14 +96,13 @@ function Header({ ...props }) {
           </Button>
         </Hidden>
       </Toolbar>
-    </AppBar>
+    
+  </AppBar>
   );
 }
-
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  rtlActive: PropTypes.bool
+ classes: PropTypes.object.isRequired,
+ color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
+ rtlActive: PropTypes.bool
 };
-
 export default withStyles(headerStyle)(Header);

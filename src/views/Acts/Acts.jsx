@@ -49,10 +49,11 @@ class Acts extends React.Component {
   }
 
   deleteAct(id) {
+  
     this.props.deleteAct({
       variables:
         {
-          id
+          id:id
           
         }
     })
@@ -78,21 +79,34 @@ class Acts extends React.Component {
                                             <div >
                                                <ModelEdit/>
                                             </div>
-                                            <div >
+                                            <div>
                                                 <Button
-                                                 justIcon
-                                                 round
-                                                 simple
-                                                 onClick={() => {
-                                                   alert(act.id)
-                                                   this.deleteAct(act.id)
-                                                 }}
-                                                 color="danger"
-                                                 className="remove"
-                                                >
-                                                   <Close />
-                                                </Button>{" "}
+                                           justIcon
+                                           round
+                                           simple
+                                           onClick={() => {
+                                              alert(act.id)
+                                             var data = this.state.acts;
+                                             data.find((o, i) => {
+                                               if (o.id === act.id) {
+                                               alert(act.id)
+                                                 // here you should add some custom code so you can delete the data
+                                                 // from this component and from your server as well
+                                                 data.splice(i, 1);
+                                                 return true;
+                                                
+                                               }
+                                               return false;
+                                             });
+                                             this.setState({acts: data });
+                                           }}
+                                           color="danger"
+                                           className="remove"
+                                         >
+                                           <Close />
+                                         </Button>{" "}
                                             </div>
+                                            
                                           </div>
                                           
                                         )
@@ -107,7 +121,7 @@ class Acts extends React.Component {
     const { classes } = this.props;
     return (
         <div>
-        <Model/>
+        <Model />
       <GridContainer>
         <GridItem xs={12}>
           <Card>
@@ -173,14 +187,20 @@ const ACTS_QUERY = gql`
 const DELETE_ACTS = gql`
     mutation deleteAct( $id:ID! ){
          deleteAct(id:$id){
-                              id            
+                              id           
                            }
                         } `
 
 export default compose(
   graphql(ACTS_QUERY,{
 name:"acts",
- 
+ /*options:(ownProps)=>({
+    variables: {
+    id:acts.id
+    }
+  })*/
 }),
-  graphql(DELETE_ACTS,)
+  graphql(DELETE_ACTS,{
+  name:"delectAct"
+  })
 )(Acts);

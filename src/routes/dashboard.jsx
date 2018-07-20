@@ -6,6 +6,7 @@ import Gallery from "views/Gallery/Gallery.jsx";
 import GalleryDetails from "views/Gallery/GalleryDetails.jsx";
 import Journals from "views/Journals/Journals.jsx";
 import Judgments from "views/Judgments/Judgments.jsx";
+import Documents from "views/DocumentsAndDeeds/Documents.jsx";
 
 
 
@@ -37,6 +38,12 @@ var dashRoutes = [
         name: "Documents And Deeds",
         icon: DashboardIcon,
         component: DocumentsAndDeeds
+      },
+      {
+        path: "/Documents/:id",
+        name: "Documents",
+        icon: DashboardIcon,
+        component: Documents
       },
       {
         path: "/gallery",

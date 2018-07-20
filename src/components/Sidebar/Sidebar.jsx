@@ -14,7 +14,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Hidden from "@material-ui/core/Hidden";
 import Collapse from "@material-ui/core/Collapse";
-
+import Appbar from "./Appbar";
 // core components
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 
@@ -49,6 +49,7 @@ class SidebarWrapper extends React.Component {
         {user}
         {headerLinks}
         {links}
+        
       </div>
     );
   }
@@ -296,6 +297,7 @@ class Sidebar extends React.Component {
             cx({
               [" " + classes[color]]: this.activeRoute(prop.path)
             });
+
           const itemText =
             classes.itemText +
             " " +
@@ -324,6 +326,7 @@ class Sidebar extends React.Component {
                   className={itemText}
                 />
               </NavLink>
+              
             </ListItem>
           );
         })}
